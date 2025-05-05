@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ForceX</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <div class="header-container">
       <div class="header-informacoes">
-        <h3>Parcelamos até 1000x Sem Juros</h3>
+        <h3>Parcelamos até 1000x Com Juros</h3>
       </div>
       <div class="header-nav-bar">
         <img src="./assets/88852b06-b0e8-4167-8c15-959421be5a46-removebg-preview.png" class="logo" alt="" />
@@ -18,7 +18,7 @@
         <ul class="header-links-list">
           <li><a href="./login-cadastro.html"><img src="/assets/images-removebg-preview.png" alt="" /></a></li>
           <li class="login-text"><a href="./login-cadastro.html"><h4>Entre ou Cadastre-se</h4></a></li>
-          <li><a href="#"><img src="./assets/png-transparent-shopping-cart-icon-shopping-cart-black-design-trade-removebg-preview.png" alt="" /></a></li>
+          <li><a href="#" class="abrir-carrinho"><img src="./assets/png-transparent-shopping-cart-icon-shopping-cart-black-design-trade-removebg-preview.png" class="carinho" alt="" /></a></li>
         </ul>
       </div>
       <div class="header-nav-link">
@@ -37,10 +37,10 @@
       <div class="carrossel-slide" id="slide">
         <a href="#"><img src="./assets/whey-protein.png" alt="Imagem 1" /></a>
         <a href="#"><img src="./assets/kit ALFA.png" alt="Imagem 2" /></a>
-        <a href="#"><img src="./assets/Design sem nome (1).png" alt="Imagem 3" /></a>
+        <a href="#"><img src="./assets/propaganda.png" alt="Imagem 3" /></a>
       </div>
-      <button class="btn prev" onclick="voltarSlide()">❮</button>
-      <button class="btn next" onclick="avancarSlide()">❯</button>
+      <button class="btn prev">❮</button>
+      <button class="btn next">❯</button>
     </div>
 
     <div class="menu">
@@ -68,7 +68,7 @@
           <span>R$150,00</span>
         </div>
         <div class="vitrine-butao">
-          <button>COMPRAR</button>
+          <button class="btn-comprar" data-id="1" data-nome="KIT ALFA 100% PURO (10KG) DE PURA EMOÇÃO" data-preco="150.00" data-imagem="./assets/png-transparent-dietary-supplement-bodybuilding-supplement-gainer-whey-protein-bodybuilding-nutrition-whey-sports-thumbnail-removebg-preview.png">COMPRAR</button>
         </div>
       </div>
       <div class="vitrine">
@@ -76,13 +76,13 @@
           <img src="./assets/pngwing.com.png" alt="">
         </div>
         <div class="vitrine-nome">
-          <h2>WHEY GOLD<br>(1KG) SABOR CHOCOLATE  </h2>
+          <h2>WHEY GOLD<br>(1KG) SABOR CHOCOLATE</h2>
         </div>
         <div class="vitrine-infos">
           <span>R$250,00</span>
         </div>
         <div class="vitrine-butao">
-          <button>COMPRAR</button>
+          <button class="btn-comprar" data-id="2" data-nome="WHEY GOLD (1KG) SABOR CHOCOLATE" data-preco="250.00" data-imagem="./assets/pngwing.com.png">COMPRAR</button>
         </div>
       </div>
       <div class="vitrine">
@@ -90,13 +90,13 @@
           <img src="./assets/pngwing.com (1).png" alt="">
         </div>
         <div class="vitrine-nome">
-          <h2>CREATINA POWDER<br>(300G) 100% PURA </h2>
+          <h2>CREATINA POWDER<br>(300G) 100% PURA</h2>
         </div>
         <div class="vitrine-infos">
           <span>R$120,00</span>
         </div>
         <div class="vitrine-butao">
-          <button>COMPRAR</button>
+          <button class="btn-comprar" data-id="3" data-nome="CREATINA POWDER (300G) 100% PURA" data-preco="120.00" data-imagem="./assets/pngwing.com (1).png">COMPRAR</button>
         </div>
       </div>
       <div class="vitrine">
@@ -104,18 +104,104 @@
           <img src="./assets/pngwing.com (3).png" alt="">
         </div>
         <div class="vitrine-nome">
-          <h2>VITAMINA BCAA<br>(345G) AÇÃO INSTANTÂNEA </h2>
+          <h2>VITAMINA BCAA<br>(345G) AÇÃO INSTANTÂNEA</h2>
         </div>
         <div class="vitrine-infos">
           <span>R$50,00</span>
         </div>
         <div class="vitrine-butao">
-          <button>COMPRAR</button>
+          <button class="btn-comprar" data-id="4" data-nome="VITAMINA BCAA (345G) AÇÃO INSTANTÂNEA" data-preco="50.00" data-imagem="./assets/pngwing.com (3).png">COMPRAR</button>
         </div>
       </div>
     </div>
   </main>
 
-  <script src="./script.js"></script>
+  <div class="carrinho-overlay" id="carrinhoOverlay">
+    <div class="carrinho-container">
+      <div class="carrinho-header">
+        <h2>Seu Carrinho</h2>
+        <button class="fechar-carrinho">&times;</button>
+      </div>
+      <div id="carrinhoItens">
+        <div class="carrinho-vazio">Seu carrinho está vazio</div>
+      </div>
+      <div class="carrinho-total">
+        Total: R$<span id="carrinhoTotal">0,00</span>
+        <div id="descontoInfo" class="desconto-info"></div>
+      </div>
+      <div class="carrinho-botoes">
+        <button class="carrinho-botao limpar-carrinho" id="limparCarrinho">Limpar Carrinho</button>
+        <button class="carrinho-botao finalizar-compra" id="finalizarCompra">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="finalizacao-overlay" id="finalizacaoOverlay">
+    <div class="finalizacao-container">
+      <div class="finalizacao-header">
+        <h2>Finalizar Compra</h2>
+        <button class="fechar-finalizacao">&times;</button>
+      </div>
+      
+      <form id="finalizacaoForm">
+        <div class="form-group">
+          <label for="nome">Nome Completo</label>
+          <input type="text" id="nome" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" required>
+        </div>
+        
+        <div class="form-group cupom-group">
+          <label for="cupom">Cupom de Desconto</label>
+          <input type="text" id="cupom" placeholder="Selecione ou digite um cupom" autocomplete="off">
+          <div class="cupom-dropdown" id="cupomDropdown">
+            <div class="cupom-option" data-codigo="DESCONTO10" data-desconto="10">DESCONTO10 - 10% de desconto</div>
+            <div class="cupom-option" data-codigo="PRIMEIRACOMPRA" data-desconto="15">PRIMEIRACOMPRA - 15% de desconto</div>
+            <div class="cupom-option" data-codigo="BLACKFRIDAY" data-desconto="20">BLACKFRIDAY - 20% de desconto</div>
+            <div class="cupom-option" data-codigo="FREEGRATIS" data-desconto="5">FREEGRATIS - 5% de desconto</div>
+            <div class="cupom-option" data-codigo="AUMENTAPRECO" data-aumento="30">AUMENTAPRECO - +R$30,00 (teste)</div>
+          </div>
+        </div>
+        
+        <div class="metodo-pagamento">
+          <h3>Método de Pagamento</h3>
+          <div class="metodo-pagamento-options">
+            <div class="metodo-pagamento-option">
+              <input type="radio" id="cartao" name="pagamento" value="cartao" checked>
+              <label for="cartao">Cartão de Crédito</label>
+            </div>
+            <div class="metodo-pagamento-option">
+              <input type="radio" id="boleto" name="pagamento" value="boleto">
+              <label for="boleto">Boleto Bancário</label>
+            </div>
+            <div class="metodo-pagamento-option">
+              <input type="radio" id="pix" name="pagamento" value="pix">
+              <label for="pix">PIX</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-botoes">
+          <button type="button" class="form-botao cancelar" id="cancelarFinalizacao">Cancelar</button>
+          <button type="submit" class="form-botao confirmar">Confirmar Compra</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
